@@ -1,6 +1,6 @@
-import datetime
 import json
 import math
+import datetime
 import logging
 
 logger = logging.getLogger(__name__)
@@ -19,11 +19,13 @@ def transform_payload(payload_json: str) -> dict:
     try:
         # Load the JSON payload
         payload = json.loads(payload_json)
-        print("untransformed=", json.dumps(payload, indent=2))
+        # print("untransformed=", json.dumps(payload, indent=2))
 
         # Extract timestamp and convert to RFC 3339 format
         timestamp = payload["t"]
-        rfc3339_time = datetime.datetime.fromtimestamp(timestamp).isoformat()
+        utc_time = datetime.datetime.utcfromtimestamp(timestamp).replace(tzinfo=datetime.timezone.utc)
+        rfc3339_time = utc_time.isoformat()
+        print(rfc3339_time)
 
         data = {}
         for reading in payload["r"]:

@@ -53,7 +53,7 @@ class TestTransformPayload(unittest.TestCase):
         }
         transformed_payload = transform_payload(json.dumps(payload))
         expected_output = {
-            "time": "2023-08-25T17:02:10",
+            "time": "2023-08-25T16:02:10+00:00",
             "data": {
                 "strato-1": {
                     "cpu_load": 0.0,
@@ -102,7 +102,7 @@ class TestTransformPayload(unittest.TestCase):
         }
         transformed_payload = transform_payload(json.dumps(payload))
         expected_output = {
-            "time": "2023-08-25T17:02:10",
+            "time": "2023-08-25T16:02:10+00:00",
             "data": {
                 "strato-1": {
                     "cpu_load": 0.0,
