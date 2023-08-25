@@ -1,0 +1,2 @@
+django-environ==0.10.0
+paho-mqtt==1.6.1
