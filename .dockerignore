@@ -1,0 +1,14 @@
+.git
+.github
+.dockerignore
+.gitignore
+
+.idea
+.vscode
+
+__pycache__/
+**.pytest_cache/
+.gitattributes
+
+!README.md
+*.md
