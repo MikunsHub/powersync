@@ -13,11 +13,12 @@ The project's architecture is built to process data from energy equipment such a
 ├── README.md              # Project documentation
 ├── architecture.md        # Detailed explanation of the software architecture
 ├── ca-stage.crt           # TLS/SSL certificate file
-├── config_logging.py      # Logging configuration module
-├── main.py                # Entry point of the application
-├── mqtt_client.py         # MQTT client implementation
+├── src                    # Source code directory
+│   ├── config_logging.py  # Logging configuration module
+│   ├── main.py            # Entry point of the application
+│   ├── mqtt_client.py     # MQTT client implementation
+│   └── transform.py       # Data transformation module
 ├── requirements.txt       # Required Python packages
-├── transform.py           # Data transformation module
 ├── test                   # Unit tests directory
 │   ├── __init__.py
 │   ├── __pycache__

@@ -1,8 +1,11 @@
 import os
 import environ
-from mqtt_client import MQTTClient
-from config_logging import configure_logging 
+
+
 from prometheus_client import start_http_server
+from config_logging import configure_logging
+
+from mqtt_client import MQTTClient
 
 # Configure logging
 configure_logging()

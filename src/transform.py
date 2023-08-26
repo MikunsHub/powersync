@@ -22,28 +22,31 @@ def transform_payload(payload_json: str) -> dict:
 
         # Extract timestamp and convert to RFC 3339 format
         timestamp = payload["t"]
-        utc_time = datetime.datetime.utcfromtimestamp(timestamp).replace(tzinfo=datetime.timezone.utc)
+        utc_time = datetime.datetime.utcfromtimestamp(timestamp).replace(
+            tzinfo=datetime.timezone.utc
+        )
         rfc3339_time = utc_time.isoformat()
-        print(rfc3339_time)
 
         data = {}
         for reading in payload["r"]:
             vid = reading.pop("_vid", None)
-            if vid:
-                # Clean the reading data by removing keys starting with "_" and None values
+
+            # Check for None values in the reading
+            if vid and all(value is not None for value in reading.values()):
+                # Clean the reading data by removing keys with '_' values or values that are NaN
                 cleaned_reading = {
                     key: value
                     for key, value in reading.items()
                     if not key.startswith("_") and value is not None
                 }
-                if all(
-                    isinstance(v, float) and not math.isnan(v)
-                    for v in cleaned_reading.values()
-                ):
+
+                if cleaned_reading:
                     data.setdefault(vid, {}).update(cleaned_reading)
 
         transformed_payload = {"time": rfc3339_time, "data": data}
-
+        print("transformed=", json.dumps(transformed_payload, indent=2))
         return transformed_payload
     except Exception as e:
         logger.error("An error occurred in transform_payload: %s", e)
+
+
