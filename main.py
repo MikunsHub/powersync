@@ -1,7 +1,9 @@
 import os
+import time
 import environ
 from mqtt_client import MQTTClient
 from config_logging import configure_logging 
+from prometheus_client import start_http_server
 
 # Configure logging
 configure_logging()
@@ -24,3 +26,6 @@ topic = env("TOPIC")
 mqtt_client = MQTTClient(host, port, ca_file, username, password, topic)
 mqtt_client.connect()
 mqtt_client.loop_forever()
+
+# Starting Prometheus 
+start_http_server(9090)

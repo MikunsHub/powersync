@@ -19,7 +19,6 @@ def transform_payload(payload_json: str) -> dict:
     try:
         # Load the JSON payload
         payload = json.loads(payload_json)
-        # print("untransformed=", json.dumps(payload, indent=2))
 
         # Extract timestamp and convert to RFC 3339 format
         timestamp = payload["t"]

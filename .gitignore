@@ -1,2 +1,7 @@
 .env
 __pycache__
+data
+data/chunks_head
+data/wal
+data/lock
+data/queries.active

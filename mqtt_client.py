@@ -4,6 +4,7 @@ import json
 import signal
 import logging
 import paho.mqtt.client as mqtt
+from prometheus_client import Summary, Counter
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +25,7 @@ class MQTTClient:
         max_retries (int): Maximum number of connection retry attempts on failure.
         retry_interval (int): Time interval (in seconds) between connection retry attempts.
     """
+
     def __init__(
         self,
         host,
@@ -48,6 +50,14 @@ class MQTTClient:
         self.max_retries = max_retries
         self.retry_interval = retry_interval
 
+        self.error_counter = Counter('error_count', 'Number of errors')
+        self.processing_time = Summary(
+            "message_processing_time", "Time spent processing messages"
+        )
+        self.message_counter = Counter(
+            "message_throughput_total", "Total number of received messages"
+        )
+
         signal.signal(signal.SIGINT, self.handle_shutdown)
 
     def on_connect(self, client, userdata, flags, rc):
@@ -67,8 +77,10 @@ class MQTTClient:
                 logger.info(f"Subscribed to {self.topic}")
             else:
                 logger.error("Connection failed with code: %s", rc)
+                self.error_counter.inc()
         except Exception as e:
             logger.error("An error occurred in on_connect: %s", e)
+            self.error_counter.inc()
 
     def on_message(self, client, userdata, msg):
         """
@@ -80,10 +92,21 @@ class MQTTClient:
             msg: The received message object.
         """
         try:
+            # Record starting time
+            start_time = time.time()
+
+            # Transform Payload and return
             transformed_payload = transform_payload(msg.payload)
             print("transformed=", json.dumps(transformed_payload, indent=2))
+
+            # Measure and observe processing time
+            self.processing_time.observe(time.time() - start_time)
+
+            # Increment message counter
+            self.message_counter.inc()
         except Exception as e:
             logger.error("An error occurred in on_message: %s", e)
+            self.error_counter.inc()
 
     def connect(self):
         """
@@ -104,9 +127,11 @@ class MQTTClient:
                     e,
                 )
                 retries += 1
+                self.error_counter.inc()
                 time.sleep(self.retry_interval)
 
         logger.error("Failed to connect after %d attempts. Exiting.", self.max_retries)
+        self.error_counter.inc()
         exit()
 
     def loop_forever(self):
