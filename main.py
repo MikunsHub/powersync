@@ -1,5 +1,4 @@
 import os
-import time
 import environ
 from mqtt_client import MQTTClient
 from config_logging import configure_logging 

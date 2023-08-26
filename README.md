@@ -1,6 +1,6 @@
 # PowerSync MQTT Client
 
-The PowerSync MQTT Client is a Python application designed to connect to an MQTT broker, subscribe to a specific topic, and process incoming messages. It transforms and logs the received data while providing robust error handling and a graceful shutdown mechanism. This project aims to provide a reliable and structured way to handle MQTT communication and data processing.
+The PowerSync MQTT Client is a Python application designed to connect to an MQTT broker, subscribe to a specific topic, and process incoming messages. It transforms and logs the received data while providing robust error handling and a graceful shutdown mechanism. For a detailed inlook into this project, [architecture.md](architecture.md) goes into details.
 
 ## Features
 
@@ -14,7 +14,8 @@ The PowerSync MQTT Client is a Python application designed to connect to an MQTT
 
 - **Graceful Shutdown**: Supports a graceful shutdown mechanism that allows the application to be terminated without data loss or abrupt termination.
 
-- **Logging System**: Utilizes a logging system to provide detailed information about the application's operations, facilitating debugging and monitoring.
+- **Logging System**: Has a logging system which provides detailed information about the application's operations, facilitating debugging and monitoring.
+
 
 ## Prerequisites
 
@@ -67,6 +68,20 @@ The PowerSync MQTT Client is a Python application designed to connect to an MQTT
 
 The application's behavior can be configured through the `.env` file. Adjust the parameters according to your MQTT broker's settings and the desired behavior of the MQTT client.
 
+## Running Tests
+
+To ensure the reliability and correctness of the PowerSync MQTT Client, tests have been provided. Follow these steps to run the tests:
+
+1. Make sure you have set up the project as instructed in the [Installation](#installation) section.
+
+2. Activate your virtual environment (if you created one) where the required dependencies are installed.
+
+```bash
+python -m unittest discover
+```
+This command will discover and run all the test cases in the test directory.
+
+After running the tests, you will see the test results displayed in the terminal.
 
 ## Acknowledgments
 

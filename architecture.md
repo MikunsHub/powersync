@@ -65,7 +65,7 @@ The project's architecture is built to process data from energy equipment such a
 The project structure follows a modular approach, separating different components and functionalities for better organization, maintainability, and testability.
 
 ## Components
-
+![Alt text](image.png)
 ### MQTT Data Acquisition
 
 1. **Dataloggers**: These are deployed at various sites to read data directly from energy equipment. They send the acquired data over MQTT to the main AMMP MQTT broker at `mqtt.ammp.io`.
@@ -86,7 +86,6 @@ The project structure follows a modular approach, separating different component
 
 1. **Basic Metrics**: The MQTT client incorporates basic monitoring by tracking the number of messages processed. This metric provides insight into the message processing rate.
 
-2. **Alerts via Email**: The MQTT client is equipped to send email alerts when certain thresholds are met. For example, an alert can be triggered if the number of processed messages exceeds a predetermined limit.
 
 ## Workflow
 
@@ -96,15 +95,14 @@ The project structure follows a modular approach, separating different component
 
 3. Upon receiving an MQTT message, the client invokes the `transform_payload` function to convert the JSON payload into a structured data format.
 
-4. Transformed data is displayed on the screen, providing users with a clear view of the acquired and processed data.
+4. The Transformed data is displayed on the screen, providing users with a clear view of the acquired and processed data.
 
-5. Basic metrics are tracked to monitor the processing rate of messages.
+5. Basic metrics are tracked using Prometheus to monitor the processing rate of messages and number of messages received.
 
-6. If a predefined threshold is reached, an email alert is sent to notify stakeholders of the threshold breach.
 
 ## Conclusion
 
-The architecture of the MQTT data acquisition and transformation project efficiently handles data collection, transformation, and display. By incorporating basic monitoring and alerting mechanisms, the system maintains reliability and provides timely notifications to ensure the integrity of the data processing pipeline.
+The architecture of the MQTT data acquisition and transformation project efficiently handles data collection from the AMMP MQTT Broker, transformation of the data, and finally display of the data. By incorporating basic monitoring and alerting mechanisms, the system maintains reliability and provides efficient logging and monitoring to ensure easy observability and aids integrity of the data going to the data processing pipeline.
 
 ---
 
