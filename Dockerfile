@@ -12,3 +12,6 @@ RUN pip install -r requirements.txt
 
 # Command to run application
 CMD ["python", "src/main.py"]
+
+# Exposing Prometheus metrics port
+EXPOSE 9090

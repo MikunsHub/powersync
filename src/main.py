@@ -1,11 +1,8 @@
 import os
 import environ
-
-
-from prometheus_client import start_http_server
-from config_logging import configure_logging
-
 from mqtt_client import MQTTClient
+from config_logging import configure_logging
+from prometheus_client import start_http_server
 
 # Configure logging
 configure_logging()
@@ -30,4 +27,5 @@ mqtt_client.connect()
 mqtt_client.loop_forever()
 
 # Starting Prometheus 
-start_http_server(9090)
+PROMETHEUS_SERVICE_PORT= env("PROMETHEUS_SERVICE_PORT")
+start_http_server(PROMETHEUS_SERVICE_PORT)

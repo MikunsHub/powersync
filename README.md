@@ -25,7 +25,7 @@ The PowerSync MQTT Client is a Python application designed to connect to an MQTT
 - MQTT broker information (host, port, topic, etc.)
 - MQTT broker's CA file for secure communication
 
-## Installation
+## Local Installation
 
 1. Clone this repository to your local machine.
    
@@ -55,14 +55,22 @@ The PowerSync MQTT Client is a Python application designed to connect to an MQTT
    USERNAME=your_mqtt_username
    PASSWORD=your_mqtt_password
    TOPIC=your_mqtt_topic
+   PROMETHEUS_SERVICE_ADDRESS=your_prometheus_address
+   PROMETHEUS_SERVICE_PORT=your_prometheus_port
    ```
 
-5. Run the MQTT client application.
+5. Run the application.
    
    ```bash
    python src/main.py
    ```
 
+6. Run prometheus.
+   
+   ```bash
+   prometheus --config.file=monitoring/prometheus.yml
+   ```
+To view the metrics of the application, navigate to Prometheus UI by going to http://localhost:9090
 ## Configuration
 
 The application's behavior can be configured through the `.env` file. Adjust the parameters according to your MQTT broker's settings and the desired behavior of the MQTT client.

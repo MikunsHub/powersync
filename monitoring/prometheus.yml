@@ -2,6 +2,6 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
-  - job_name: 'powersync'
+  - job_name: "powersync"
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ["${PROMETHEUS_SERVICE_ADDRESS}:${PROMETHEUS_SERVICE_PORT}"]

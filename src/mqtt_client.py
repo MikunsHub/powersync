@@ -4,11 +4,11 @@ import json
 import signal
 import logging
 import paho.mqtt.client as mqtt
+from transform import transform_payload
 from prometheus_client import Summary, Counter
 
 logger = logging.getLogger(__name__)
 
-from transform import transform_payload
 
 
 class MQTTClient:
