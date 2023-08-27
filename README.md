@@ -30,8 +30,7 @@ The PowerSync MQTT Client is a Python application designed to connect to an MQTT
 1. Clone this repository to your local machine.
    
    ```bash
-   git clone https://github.com/yourusername/powersync.git
-   cd powersync-mqtt-client
+   git clone https://github.com/MikunsHun/powersync.git
    ```
 
 2. Create a virtual environment (recommended).
