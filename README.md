@@ -61,7 +61,7 @@ The PowerSync MQTT Client is a Python application designed to connect to an MQTT
 5. Run the MQTT client application.
    
    ```bash
-   python main.py
+   python src/main.py
    ```
 
 ## Configuration
